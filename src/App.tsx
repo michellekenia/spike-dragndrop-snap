@@ -10,17 +10,7 @@ function App() {
         <Incorporate />
       </div>
       <footer className="bg-gray-100 text-center text-gray-500 py-4 pt-7">
-        <p>
-          Desenvolvido por{" "}
-          <a
-            href=""
-            className="text-blue-500 hover:text-blue-700"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            @Carlos Eduardo Dias Batista
-          </a>
-        </p>
+
       </footer>
     </>
   );

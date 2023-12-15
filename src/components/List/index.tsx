@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Droppable,
-  DragDropContext,
   DroppableProvided,
   DroppableStateSnapshot,
 } from "react-beautiful-dnd";

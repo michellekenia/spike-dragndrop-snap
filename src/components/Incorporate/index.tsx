@@ -14,45 +14,38 @@ const Incorporate = () => {
       {
         id: 1,
         uuid: "52f9df20-9393-4c4d-b72c-7bfa4398a4477",
-        title: "What is Lorem Ipsum?",
-        subtitle: "Lorem Ipsum is simply dummy",
-        updatedAt: "6 days ago",
-      },
-      {
-        id: 2,
-        uuid: "52f9df20-9393-4c4d-b72c-7bfa4398a448",
-        title: "Why do we use it?",
-        subtitle: "The point of using at its layout",
-        updatedAt: "2 days ago",
+        title: "algoritmo do ovo frito",
+        subtitle: "pegue uma frigideira",
+        img: 'https://static.paodeacucar.com/img/uploads/1/762/24748762.png'
       },
       {
         id: 3,
         uuid: "52f9df20-9393-4c4d-b72c-7bfa4398a449",
-        title: "Where does it come from?",
-        subtitle: "Contrary to popular belief, Lorem Ipsum is not simply",
-        updatedAt: "3 days ago",
+        title: "algoritmo do ovo frito",
+        subtitle: "pegue um ovo",
+        img: 'https://static.paodeacucar.com/img/uploads/1/609/24190609.png'
+
       },
+      // {
+      //   id: 2,
+      //   uuid: "52f9df20-9393-4c4d-b72c-7bfa4398a448",
+      //   title: "algoritmo do ovo frito",
+      //   subtitle: "coloque a frigideira no fogão"
+      // },
     ],
 
-    assigned: [
-      {
-        id: 5,
-        uuid: "52f9df20-9393-4c4d-b72c-7bfa4398a450",
-        title: "Where can I get some?",
-        subtitle: "There are many variations",
-        updatedAt: "6 days ago",
-      },
-      {
-        id: 6,
-        uuid: "52f9df20-9393-4c4d-b72c-7bfa4398a451",
-        title: "Morbi sagittis tellus a efficitur",
-        subtitle: "Etiam mollis eros eget mi.",
-        updatedAt: "2 days ago",
-      },
-    ],
+    assigned: [{
+      id: 2,
+      uuid: "52f9df20-9393-4c4d-b72c-7bfa4398a448",
+      title: "algoritmo do ovo frito",
+      subtitle: "coloque a frigideira no fogão",
+      img:'https://static.paodeacucar.com/img/uploads/1/40/25351040.jpeg'
+
+    }]
   };
 
   const [items, setItems] = useState(itemsNormal);
+  const [isCorrect, setIsCorrect] = useState(false)
 
   const removeFromList = (list: any, index: any) => {
     const result = Array.from(list);
@@ -65,6 +58,20 @@ const Incorporate = () => {
     result.splice(index, 0, element);
     return result;
   };
+
+  const idOrdered = (list: any) => {
+    let isOrdered = true
+    for (let i = 0; i < list.length; i++){
+      console.log(`${list[i].subtitle} id: ${list[i].id} -> ${list[i].id != i+1}`)
+      if (list[i].id != i+1){
+        isOrdered = false;
+        break;
+      }
+    }
+
+    return isOrdered;
+  };
+  
 
   const onDragEnd = (result: any) => {
     if (!result.destination) {
@@ -85,11 +92,16 @@ const Incorporate = () => {
       result.destination.index,
       removedElement
     );
+    
+    if(listCopy.assigned.length>itemsNormal.available.length)
+      setIsCorrect(idOrdered(listCopy.assigned))
     setItems(listCopy);
   };
 
   return (
     <>
+    <h1 className="text-2xl font-bold mt-12 mb-14" >{(isCorrect?'Parabéns, a sequência está correta!':'Tente organizar a sequência novamente!')}</h1>
+
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="flex p-12">
           <List title="Disponíveis" onDragEnd={onDragEnd} name="available">
@@ -112,8 +124,9 @@ const Incorporate = () => {
               </Draggable>
             ))}
           </List>
+          
           <List title="Atribuídos" onDragEnd={onDragEnd} name="assigned">
-            {items.assigned.map((item, index) => (
+            {items.assigned?.map((item, index) => (
               <Draggable draggableId={item.uuid} index={index} key={item.id}>
                 {(provided, snapshot) => (
                   <div
