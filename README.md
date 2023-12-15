@@ -1,3 +1,9 @@
+Repositório original do projeto: https://github.com/carloseduardodb/beautiful-and-accessible-drag-and-drop-for-list
+
+Utilizado para fins de estudo. 
+
+*******************************
+
 # POC - react-beautiful-dnd
 
 ## Aplicação Funcionando
